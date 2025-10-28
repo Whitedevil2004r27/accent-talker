@@ -14,7 +14,127 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      accent_profiles: {
+        Row: {
+          accent_type: string
+          audio_samples_count: number | null
+          calibration_data: Json | null
+          created_at: string | null
+          id: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          accent_type: string
+          audio_samples_count?: number | null
+          calibration_data?: Json | null
+          created_at?: string | null
+          id?: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          accent_type?: string
+          audio_samples_count?: number | null
+          calibration_data?: Json | null
+          created_at?: string | null
+          id?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "accent_profiles_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string | null
+          display_name: string | null
+          email: string | null
+          id: string
+          preferred_accent: string | null
+          preferred_source_language: string | null
+          preferred_target_language: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          email?: string | null
+          id: string
+          preferred_accent?: string | null
+          preferred_source_language?: string | null
+          preferred_target_language?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string | null
+          display_name?: string | null
+          email?: string | null
+          id?: string
+          preferred_accent?: string | null
+          preferred_source_language?: string | null
+          preferred_target_language?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      translation_history: {
+        Row: {
+          audio_url: string | null
+          confidence_score: number | null
+          created_at: string | null
+          detected_accent: string | null
+          id: string
+          source_language: string
+          source_text: string
+          target_language: string
+          translated_text: string
+          user_id: string
+        }
+        Insert: {
+          audio_url?: string | null
+          confidence_score?: number | null
+          created_at?: string | null
+          detected_accent?: string | null
+          id?: string
+          source_language: string
+          source_text: string
+          target_language: string
+          translated_text: string
+          user_id: string
+        }
+        Update: {
+          audio_url?: string | null
+          confidence_score?: number | null
+          created_at?: string | null
+          detected_accent?: string | null
+          id?: string
+          source_language?: string
+          source_text?: string
+          target_language?: string
+          translated_text?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "translation_history_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
